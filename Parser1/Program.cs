@@ -20,28 +20,23 @@ namespace Parser1
                 Url = url
             };
 
+            var p = driver.PageSource;
+
             var m = driver.FindElement(By.Id("main"));
+            var a = m.GetAttribute("innerHTML");
 
-            string xpath = "//*[@id=\"main\"]/div/div[2]/div[2]/div/div/div/div[2]/section/div[1]/div[3]/div[1]/div[2]/div[2]";
-            var links = driver.FindElements(By.XPath(xpath)).ToList();
+            string xpath_1 = "//*[@id=\"main\"]/div/div[2]/div[2]/div/div/div/div[2]/section/div[1]/div[3]/div[1]/div[2]/div[2]";
+            string xpath_2 = "//*[@id=\"main\"]/div/div[2]/div[2]/div/div/div/div[2]/section/div[1]/div[3]/div[1]/div[2]/div[3]";
+            string xpath_3 = "//*[@id=\"main\"]/div/div[2]/div[2]/div/div/div/div[2]/section/div[1]/div[3]/div[1]/div[2]/div[4]";
 
-            foreach (IWebElement link in links)
-                Console.WriteLine("{0} - {1}", link.Text, link.GetAttribute("href"));
+            var el_1 = driver.FindElement(By.XPath(xpath_1));
+            var el_2 = driver.FindElement(By.XPath(xpath_2));
+            var el_3 = driver.FindElement(By.XPath(xpath_3));
 
-            using (WebClient client = new WebClient()) // WebClient class inherits IDisposable
-            {
-                string htmlCode = client.DownloadString(url);
-            }
+            var t_1 = el_1.GetAttribute("innerHTML");
+            var t_2 = el_2.GetAttribute("innerHTML");
+            var t_3 = el_3.GetAttribute("innerHTML");
 
-                var d = ParsingHelper.LoadPage(url);
-
-            string xpath_2 = "//*[@id=\"main\"]";
-//            var links = d.DocumentNode.SelectNodes(xpath_2);
-//            foreach (HtmlNode link in links)
-//                Console.WriteLine("{0} - {1}", link.InnerText, link.GetAttributeValue("href", ""));
-//            Console.WriteLine("Hello World!");
-
-            //*[@id="main"]/div/div[2]/div[2]/div/div/div/div[2]/section/div[1]/div[3]/div[1]/div[2]
         }
     }
 }
